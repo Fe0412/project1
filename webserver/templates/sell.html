@@ -8,16 +8,13 @@
 
 
 <body>
-  <h1>Product Information</h1>
+  <h1>Sellers Who Bought Their Own Products</h1>
 
   <div>
     {% for n in data %}
     <div>{{n}}</div>
     {% endfor %}
   </div>
-
-<form method="POST" action="/proinfo">
-<p>Product name: <input type="text" name="p_name"> <input type="submit" value="Submit"> </p>
 
 <p><a href="/">Go back to index</a></p>
 

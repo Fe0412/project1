@@ -8,7 +8,7 @@
 
 
 <body>
-  <h1>Product Information</h1>
+  <h1>Reviews of a Product</h1>
 
   <div>
     {% for n in data %}
@@ -16,7 +16,7 @@
     {% endfor %}
   </div>
 
-<form method="POST" action="/proinfo">
+<form method="POST" action="/reviewinfo">
 <p>Product name: <input type="text" name="p_name"> <input type="submit" value="Submit"> </p>
 
 <p><a href="/">Go back to index</a></p>

@@ -248,6 +248,20 @@ def rate():
   context = dict(data = ratee)
   return render_template("rate.html", **context)
 
+@app.route('/review')
+def review():
+  return render_template("review.html")
+
+@app.route('/sell')
+def sell():
+  cursor = g.conn.execute("SELECT u.uid,u.name FROM customer cu, sell s, users u WHERE cu.uid = s.uid AND u.uid = s.uid")
+  sellers = []
+  for result in cursor:
+    sellers.append("uid: " + str(result['uid']) + ", " + "name: " + result['name'])
+  cursor.close()
+  context = dict(data = sellers)
+  return render_template("sell.html", **context)
+
 
 '''
 Functions
@@ -319,6 +333,17 @@ def rateinfo():
   star = request.form['star']
   g.conn.execute("UPDATE rate SET star = %s WHERE uid = %s AND p_name = %s ", star, uid, p_name)
   return redirect('/rate')
+
+@app.route('/reviewinfo', methods=['GET', 'POST'])
+def reviewinfo():
+  p_name = request.form['p_name']
+  cursor =  g.conn.execute("SELECT p_name, uid, content FROM review WHERE p_name= %s ", p_name)
+  cont = []
+  for result in cursor:
+    cont.append("product name: " + result['p_name'] + ", user id: " + str(result['uid']) + ", review: " + result['content'])
+  cursor.close()
+  context = dict(data = cont)
+  return render_template("review.html", **context)
 
 
 @app.route('/login')
